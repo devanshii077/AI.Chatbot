@@ -29,24 +29,6 @@ Perfect for beginners, portfolios, or demo presentations! 🚀
 
 ---
 
-## 📁 Folder Structure
-
-AI.Chatbot/
-│
-├── chatbot/
-│ ├── intents.json # List of chatbot intents and responses
-│ ├── train.py # Script to train ML model (if used)
-│ ├── model.pkl # Trained model (optional for ML-based bot)
-│ └── chatbot.py # Core chatbot logic
-│
-├── ui/
-│ └── app.py # Main GUI interface
-│
-├── assets/
-│ └── logo.png # (Optional) UI assets
-├── requirements.txt
-└── README.md
-
 
 ## 🚀 How to Run
 
