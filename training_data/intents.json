@@ -1,0 +1,29 @@
+{
+  "intents": [
+    {
+      "tag": "greet",
+      "patterns": ["hello", "hi", "hey", "good morning", "good evening"],
+      "responses": ["Hello!", "Hi there!", "Hey! How can I help you?"]
+    },
+    {
+      "tag": "goodbye",
+      "patterns": ["bye", "goodbye", "see you later"],
+      "responses": ["Goodbye!", "Take care!", "See you soon!"]
+    },
+    {
+      "tag": "thanks",
+      "patterns": ["thanks", "thank you", "appreciate it"],
+      "responses": ["You're welcome!", "No problem!", "Glad I could help!"]
+    },
+    {
+      "tag": "name",
+      "patterns": ["what is your name", "who are you"],
+      "responses": ["I'm your virtual assistant.", "You can call me ChatBot!"]
+    },
+    {
+      "tag": "problem",
+      "patterns": ["i have a problem", "issue with product", "facing a bug"],
+      "responses": ["I'm sorry to hear that. Can you describe the issue?", "Let me know the problem, I’ll try to help!"]
+    }
+  ]
+}

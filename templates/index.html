@@ -1,0 +1,92 @@
+><!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AI Customer Support</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="toggle-container">
+    <label class="switch">
+      <input type="checkbox" onclick="toggleDarkMode()">
+      <span class="slider"></span>
+    </label>
+  </div>
+
+  <div class="chat-container">
+    <div class="chat-header">🤖 AI Customer Support</div>
+    <div class="chat-box" id="chat-box"></div>
+
+    <div class="suggestions">
+      <button onclick="quickSend('hi')">Hi</button>
+      <button onclick="quickSend('help')">Help</button>
+      <button onclick="quickSend('bye')">Bye</button>
+    </div>
+
+    <div class="input-area">
+      <input type="text" id="user-input" placeholder="Type your message...">
+      <button onclick="send()">Send</button>
+    </div>
+  </div>
+
+  <script>
+    const userInput = document.getElementById("user-input");
+    const chatBox = document.getElementById("chat-box");
+
+    function appendMessage(sender, message) {
+      const msg = document.createElement("div");
+      msg.className = sender;
+      msg.innerText = message;
+      chatBox.appendChild(msg);
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+
+    function showTyping() {
+      const typing = document.createElement("div");
+      typing.className = "bot typing";
+      typing.innerText = "Bot is typing...";
+      typing.id = "typing-indicator";
+      chatBox.appendChild(typing);
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+
+    function hideTyping() {
+      const typing = document.getElementById("typing-indicator");
+      if (typing) typing.remove();
+    }
+
+    function send() {
+      const msg = userInput.value.trim();
+      if (!msg) return;
+      appendMessage("user", msg);
+      userInput.value = "";
+
+      showTyping();
+
+      fetch(`/get?msg=${encodeURIComponent(msg)}`)
+        .then(res => res.json())
+        .then(data => {
+          hideTyping();
+          setTimeout(() => appendMessage("bot", data.response), 500);
+        })
+        .catch(err => {
+          hideTyping();
+          appendMessage("bot", "Something went wrong.");
+          console.error("Fetch error:", err);
+        });
+    }
+
+    function quickSend(msg) {
+      userInput.value = msg;
+      send();
+    }
+
+    function toggleDarkMode() {
+      document.body.classList.toggle("dark");
+    }
+  </script>
+</body>
+</html>
+
+
